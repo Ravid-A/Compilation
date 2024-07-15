@@ -1,0 +1,6 @@
+y.tab.c
+lex.yy.c
+
+.DS_Store
+
+.vscode
