@@ -1,0 +1,156 @@
+Grammar
+
+    0 $accept: S $end
+
+    1 S: EXP
+
+    2 EXP: EXP DEF
+    3    | DEF
+
+    4 DEF: INT ID ';'
+    5    | DOUBLE ID ';'
+    6    | CHAR ID ';'
+
+
+Terminals, with rules where they appear
+
+    $end (0) 0
+    ';' (59) 4 5 6
+    error (256)
+    INT (258) 4
+    DOUBLE (259) 5
+    CHAR (260) 6
+    ID <s> (261) 4 5 6
+
+
+Nonterminals, with rules where they appear
+
+    $accept (8)
+        on left: 0
+    S (9)
+        on left: 1
+        on right: 0
+    EXP (10)
+        on left: 2 3
+        on right: 1 2
+    DEF (11)
+        on left: 4 5 6
+        on right: 2 3
+
+
+State 0
+
+    0 $accept: • S $end
+
+    INT     shift, and go to state 1
+    DOUBLE  shift, and go to state 2
+    CHAR    shift, and go to state 3
+
+    S    go to state 4
+    EXP  go to state 5
+    DEF  go to state 6
+
+
+State 1
+
+    4 DEF: INT • ID ';'
+
+    ID  shift, and go to state 7
+
+
+State 2
+
+    5 DEF: DOUBLE • ID ';'
+
+    ID  shift, and go to state 8
+
+
+State 3
+
+    6 DEF: CHAR • ID ';'
+
+    ID  shift, and go to state 9
+
+
+State 4
+
+    0 $accept: S • $end
+
+    $end  shift, and go to state 10
+
+
+State 5
+
+    1 S: EXP •
+    2 EXP: EXP • DEF
+
+    INT     shift, and go to state 1
+    DOUBLE  shift, and go to state 2
+    CHAR    shift, and go to state 3
+
+    $default  reduce using rule 1 (S)
+
+    DEF  go to state 11
+
+
+State 6
+
+    3 EXP: DEF •
+
+    $default  reduce using rule 3 (EXP)
+
+
+State 7
+
+    4 DEF: INT ID • ';'
+
+    ';'  shift, and go to state 12
+
+
+State 8
+
+    5 DEF: DOUBLE ID • ';'
+
+    ';'  shift, and go to state 13
+
+
+State 9
+
+    6 DEF: CHAR ID • ';'
+
+    ';'  shift, and go to state 14
+
+
+State 10
+
+    0 $accept: S $end •
+
+    $default  accept
+
+
+State 11
+
+    2 EXP: EXP DEF •
+
+    $default  reduce using rule 2 (EXP)
+
+
+State 12
+
+    4 DEF: INT ID ';' •
+
+    $default  reduce using rule 4 (DEF)
+
+
+State 13
+
+    5 DEF: DOUBLE ID ';' •
+
+    $default  reduce using rule 5 (DEF)
+
+
+State 14
+
+    6 DEF: CHAR ID ';' •
+
+    $default  reduce using rule 6 (DEF)
